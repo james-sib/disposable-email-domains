@@ -150,9 +150,21 @@ def main() -> int:
         return 1
 
     ordered = sorted(master)
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    (DATA / "disposable_domains.txt").write_text("\n".join(ordered) + "\n", encoding="utf-8")
+    # Only bump generated_at when the domain set actually changed, so the daily
+    # Action's "commit only if changed" check stays meaningful (an unchanged run
+    # produces a byte-identical tree and no commit).
+    txt_path = DATA / "disposable_domains.txt"
+    new_txt = "\n".join(ordered) + "\n"
+    unchanged = txt_path.exists() and txt_path.read_text(encoding="utf-8") == new_txt
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if unchanged:
+        try:
+            generated_at = json.loads((DATA / "index.json").read_text(encoding="utf-8"))["generated_at"]
+        except Exception:  # noqa: BLE001
+            pass
+
+    txt_path.write_text(new_txt, encoding="utf-8")
     (DATA / "disposable_domains.json").write_text(
         json.dumps(ordered, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8"
     )
