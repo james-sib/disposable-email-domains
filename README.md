@@ -93,28 +93,34 @@ the API.
   builds `dead_mx_domains.txt`:
   `GET https://verifly.email/api/tools/domain-health?domain=<domain>`
 
+The official SDKs live at <https://github.com/james-sib/verifly-sdks> (published
+name will be `verifly-email-sdk` for both languages). They are not on PyPI/npm
+yet — install from the repo. Note: the `verifly-sdk`/`@verifly/sdk`/`verifly`
+packages on PyPI and npm are an **unrelated company**, not this project.
+
 ```bash
 # Python — live single-address verification
-pip install verifly-sdk
+pip install "git+https://github.com/james-sib/verifly-sdks.git#subdirectory=python"
 ```
 
 ```python
-from verifly import Verifly
-vf = Verifly(api_key="vf_...")          # 100 free credits at verifly.email
+from verifly_sdk import VeriflyClient
+vf = VeriflyClient("vf_...")            # 100 free credits at verifly.email
 r = vf.verify("user@example.com")
-print(r.is_disposable, r.is_catch_all, r.mx_records)
+print(r["details"]["is_disposable"], r["details"]["is_catch_all"], r["details"]["mx_records"])
 ```
 
 ```bash
-# Node — live single-address verification
-npm i @verifly/sdk
+# Node — live single-address verification (clone + build, see the SDK repo)
+git clone https://github.com/james-sib/verifly-sdks.git
+cd verifly-sdks/node && npm install && npm run build
 ```
 
 ```js
-import { Verifly } from "@verifly/sdk";
-const vf = new Verifly({ apiKey: "vf_..." });
+import { VeriflyClient } from "verifly-email-sdk";
+const vf = new VeriflyClient("vf_...");
 const r = await vf.verify("user@example.com");
-console.log(r.is_disposable, r.is_catch_all, r.mx_records);
+console.log(r.details.is_disposable, r.details.is_catch_all, r.details.mx_records);
 ```
 
 ```bash
