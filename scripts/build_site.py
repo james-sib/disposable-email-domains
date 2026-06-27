@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+"""
+build_site.py — regenerate docs/index.html (the GitHub Pages landing page)
+from the current dataset metadata. Run after aggregate.py.
+"""
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DOCS = ROOT / "docs"
+RAW = "https://raw.githubusercontent.com/james-sib/disposable-email-domains/main"
+REPO = "https://github.com/james-sib/disposable-email-domains"
+
+idx = json.loads((ROOT / "data" / "index.json").read_text(encoding="utf-8"))
+count = idx["count"]
+generated = idx["generated_at"]
+
+html = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>disposable-email-domains — open, daily-refreshed dataset</title>
+<meta name="description" content="An open, daily-refreshed dataset of disposable, role-based and dead-MX email domains. {count:,} disposable domains. Kept fresh by Verifly.">
+<link rel="canonical" href="https://verifly.email">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "disposable-email-domains",
+  "description": "Open, daily-refreshed dataset of disposable, role-based and dead-MX email domains.",
+  "license": "https://opensource.org/licenses/MIT",
+  "creator": {{"@type": "Organization", "name": "Verifly", "url": "https://verifly.email"}},
+  "url": "{REPO}",
+  "keywords": ["email", "disposable email", "email verification", "dataset", "deliverability"],
+  "isAccessibleForFree": true,
+  "distribution": [
+    {{"@type": "DataDownload", "encodingFormat": "text/plain", "contentUrl": "{RAW}/data/disposable_domains.txt"}},
+    {{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "{RAW}/data/disposable_domains.json"}}
+  ]
+}}
+</script>
+<style>
+  :root {{ color-scheme: dark; }}
+  * {{ box-sizing: border-box; }}
+  body {{ margin:0; font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+         background:#0c0f17; color:#e8edf6; }}
+  .wrap {{ max-width:760px; margin:0 auto; padding:64px 24px 96px; }}
+  h1 {{ font-size:2rem; margin:0 0 .3em; letter-spacing:-.02em; }}
+  .count {{ font-size:3.2rem; font-weight:800; color:#5eead4; letter-spacing:-.03em; }}
+  .sub {{ color:#9aa6bd; margin-top:4px; }}
+  a {{ color:#7dd3fc; text-decoration:none; }}
+  a:hover {{ text-decoration:underline; }}
+  .grid {{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:28px 0; }}
+  .card {{ background:#141a26; border:1px solid #222c3e; border-radius:12px; padding:16px 18px; }}
+  .card b {{ display:block; color:#e8edf6; }}
+  .card span {{ color:#9aa6bd; font-size:.9rem; }}
+  .cta {{ display:inline-block; margin-top:8px; background:#5eead4; color:#06231f;
+         font-weight:700; padding:12px 20px; border-radius:10px; }}
+  .cta:hover {{ text-decoration:none; filter:brightness(1.05); }}
+  code {{ background:#141a26; border:1px solid #222c3e; border-radius:6px; padding:1px 6px; }}
+  footer {{ margin-top:48px; color:#6b7690; font-size:.9rem; }}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>disposable-email-domains</h1>
+  <p class="sub">An open, <strong>daily-refreshed</strong> dataset of disposable, role-based &amp; dead-MX email domains.</p>
+
+  <div class="count">{count:,}</div>
+  <p class="sub">disposable domains &middot; last rebuilt <code>{generated}</code></p>
+
+  <div class="grid">
+    <a class="card" href="{RAW}/data/disposable_domains.txt"><b>disposable_domains.txt &darr;</b><span>one domain per line</span></a>
+    <a class="card" href="{RAW}/data/disposable_domains.json"><b>disposable_domains.json &darr;</b><span>JSON array</span></a>
+    <a class="card" href="{RAW}/data/roles.txt"><b>roles.txt &darr;</b><span>role local-parts</span></a>
+    <a class="card" href="{RAW}/data/dead_mx_domains.txt"><b>dead_mx_domains.txt &darr;</b><span>no-MX domains</span></a>
+  </div>
+
+  <p>Rebuilt every day from the major public blocklists, so you never import a
+  stale list. Free and open under MIT. &rarr; <a href="{REPO}">View on GitHub</a></p>
+
+  <p><strong>Need a live verdict on a single address?</strong> Verifly's API tells
+  you if a mailbox actually exists, is a catch-all, disposable or role-based —
+  built for AI agents, with a hosted MCP server.</p>
+  <a class="cta" href="https://verifly.email">Get an API key — 100 free credits &rarr;</a>
+  <p class="sub" style="margin-top:14px">
+    <a href="https://verifly.email/mcp">Hosted MCP server</a> &middot;
+    <a href="https://verifly.email/api/tools/domain-health?domain=example.com">Free domain-health endpoint</a>
+  </p>
+
+  <footer>
+    Kept fresh by <a href="https://verifly.email">Verifly</a> — the email-verification API for AI agents.
+    Aggregated from public, permissively-licensed lists; see the repo for attribution.
+  </footer>
+</div>
+</body>
+</html>
+"""
+
+DOCS.mkdir(exist_ok=True)
+(DOCS / "index.html").write_text(html, encoding="utf-8")
+(DOCS / ".nojekyll").write_text("", encoding="utf-8")
+print(f"Wrote docs/index.html ({count:,} domains)")

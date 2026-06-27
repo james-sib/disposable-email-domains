@@ -1,0 +1,53 @@
+name: Daily refresh
+
+# Re-aggregates the upstream disposable-domain lists every day, regenerates the
+# data files, and commits + tags only if something actually changed.
+on:
+  schedule:
+    - cron: "17 6 * * *"   # every day at 06:17 UTC
+  workflow_dispatch: {}     # allow manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Re-aggregate sources
+        run: python3 scripts/aggregate.py
+
+      - name: Update GitHub Pages count
+        run: python3 scripts/build_site.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "verifly-bot"
+          git config user.email "bot@verifly.email"
+          git add data/ docs/
+          if git diff --cached --quiet; then
+            echo "No changes — dataset already current."
+            exit 0
+          fi
+          COUNT=$(python3 -c "import json;print(json.load(open('data/index.json'))['count'])")
+          git commit -m "chore: daily refresh — ${COUNT} disposable domains"
+          git push
+
+          # Cut a dated snapshot tag (best-effort; never fail the run on tagging).
+          TAG="data-$(date -u +%Y.%m.%d)"
+          if ! git rev-parse "$TAG" >/dev/null 2>&1; then
+            git tag "$TAG"
+            git push origin "$TAG" || true
+          fi

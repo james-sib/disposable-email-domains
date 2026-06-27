@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 james-sib
+Copyright (c) 2026 Verifly (verifly.email)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+The data files under data/ are aggregated from third-party public blocklists,
+each of which retains its own license. See README.md and data/index.json for
+per-source attribution.

@@ -1,0 +1,8 @@
+# Transient source downloads (re-fetched on every build)
+sources/
+*.raw
+
+# Python
+__pycache__/
+*.pyc
+.venv/

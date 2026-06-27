@@ -1,0 +1,51 @@
+{
+  "name": "disposable-email-domains",
+  "description": "Open, daily-refreshed dataset of disposable / temporary email domains.",
+  "count": 162210,
+  "generated_at": "2026-06-27T10:39:47Z",
+  "formats": {
+    "txt": "data/disposable_domains.txt",
+    "json": "data/disposable_domains.json",
+    "roles": "data/roles.txt",
+    "dead_mx": "data/dead_mx_domains.txt"
+  },
+  "sources": [
+    {
+      "id": "disposable-email-domains",
+      "name": "disposable-email-domains/disposable-email-domains",
+      "url": "https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/main/disposable_email_blocklist.conf",
+      "license": "CC0-1.0",
+      "domains": 7833
+    },
+    {
+      "id": "ivolo",
+      "name": "ivolo/disposable-email-domains",
+      "url": "https://raw.githubusercontent.com/ivolo/disposable-email-domains/master/index.json",
+      "license": "MIT",
+      "domains": 121557
+    },
+    {
+      "id": "disposable",
+      "name": "disposable/disposable-email-domains",
+      "url": "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt",
+      "license": "MIT",
+      "domains": 74272
+    },
+    {
+      "id": "wesbos",
+      "name": "wesbos/burner-email-providers",
+      "url": "https://raw.githubusercontent.com/wesbos/burner-email-providers/master/emails.txt",
+      "license": "MIT",
+      "domains": 27279
+    },
+    {
+      "id": "fakefilter",
+      "name": "7c/fakefilter",
+      "url": "https://raw.githubusercontent.com/7c/fakefilter/main/txt/data.txt",
+      "license": "MIT",
+      "domains": 4715
+    }
+  ],
+  "maintained_by": "Verifly \u2014 https://verifly.email",
+  "license": "MIT (this aggregation); see sources for upstream licenses"
+}

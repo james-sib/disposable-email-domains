@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "disposable-email-domains: an open, daily-refreshed dataset of disposable, role-based, and dead-MX email domains"
+abstract: "A clean, deduplicated, sorted aggregation of public disposable/temporary email-domain blocklists, plus curated role-account local-parts and a verified dead-MX list. Rebuilt daily."
+type: dataset
+authors:
+  - name: "Verifly"
+    website: "https://verifly.email"
+url: "https://github.com/james-sib/disposable-email-domains"
+repository-code: "https://github.com/james-sib/disposable-email-domains"
+license: MIT
+keywords:
+  - email
+  - disposable email
+  - email verification
+  - deliverability
+  - dataset
