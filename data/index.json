@@ -1,8 +1,8 @@
 {
   "name": "disposable-email-domains",
   "description": "Open, daily-refreshed dataset of disposable / temporary email domains.",
-  "count": 162362,
-  "generated_at": "2026-07-03T09:33:41Z",
+  "count": 162347,
+  "generated_at": "2026-07-04T08:49:35Z",
   "formats": {
     "txt": "data/disposable_domains.txt",
     "json": "data/disposable_domains.json",
@@ -29,7 +29,7 @@
       "name": "disposable/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt",
       "license": "MIT",
-      "domains": 74443
+      "domains": 74429
     },
     {
       "id": "wesbos",
