@@ -1,8 +1,8 @@
 {
   "name": "disposable-email-domains",
   "description": "Open, daily-refreshed dataset of disposable / temporary email domains.",
-  "count": 162340,
-  "generated_at": "2026-07-05T09:21:16Z",
+  "count": 162357,
+  "generated_at": "2026-07-06T11:00:28Z",
   "formats": {
     "txt": "data/disposable_domains.txt",
     "json": "data/disposable_domains.json",
@@ -15,7 +15,7 @@
       "name": "disposable-email-domains/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/main/disposable_email_blocklist.conf",
       "license": "CC0-1.0",
-      "domains": 7860
+      "domains": 7900
     },
     {
       "id": "ivolo",
@@ -29,7 +29,7 @@
       "name": "disposable/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt",
       "license": "MIT",
-      "domains": 74422
+      "domains": 74438
     },
     {
       "id": "wesbos",
