@@ -1,5 +1,12 @@
 # disposable-email-domains
 
+## Free email tools & API
+
+- [Catch-all email verifier](https://verifly.email/tools/catch-all-checker) — check if a domain is accept-all
+- [Disposable email checker](https://verifly.email/tools/disposable-email-checker)
+- [Bulk email verification API](https://verifly.email/bulk-email-verification-api) — clean CSV lists
+- [Email verification API for developers](https://verifly.email/email-verification-api-for-developers) — pay-as-you-go, 100 free credits, no monthly fee
+
 **An open, daily-refreshed dataset of disposable, role-based, and dead-MX email domains.**
 
 If you run signups, newsletters, free trials, or AI agents that send mail, you
