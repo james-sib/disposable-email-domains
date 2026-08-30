@@ -1,8 +1,8 @@
 {
   "name": "disposable-email-domains",
   "description": "Open, daily-refreshed dataset of disposable / temporary email domains.",
-  "count": 162834,
-  "generated_at": "2026-08-29T12:39:10Z",
+  "count": 162833,
+  "generated_at": "2026-08-30T11:51:09Z",
   "formats": {
     "txt": "data/disposable_domains.txt",
     "json": "data/disposable_domains.json",
@@ -29,7 +29,7 @@
       "name": "disposable/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt",
       "license": "MIT",
-      "domains": 74915
+      "domains": 74914
     },
     {
       "id": "wesbos",
@@ -43,7 +43,7 @@
       "name": "7c/fakefilter",
       "url": "https://raw.githubusercontent.com/7c/fakefilter/main/txt/data.txt",
       "license": "MIT",
-      "domains": 4764
+      "domains": 4763
     }
   ],
   "maintained_by": "Verifly \u2014 https://verifly.email",
