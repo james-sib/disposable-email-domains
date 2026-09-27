@@ -1,8 +1,8 @@
 {
   "name": "disposable-email-domains",
   "description": "Open, daily-refreshed dataset of disposable / temporary email domains.",
-  "count": 163312,
-  "generated_at": "2026-09-26T11:19:46Z",
+  "count": 163520,
+  "generated_at": "2026-09-27T11:57:57Z",
   "formats": {
     "txt": "data/disposable_domains.txt",
     "json": "data/disposable_domains.json",
@@ -15,7 +15,7 @@
       "name": "disposable-email-domains/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/main/disposable_email_blocklist.conf",
       "license": "CC0-1.0",
-      "domains": 8981
+      "domains": 9185
     },
     {
       "id": "ivolo",
@@ -29,7 +29,7 @@
       "name": "disposable/disposable-email-domains",
       "url": "https://raw.githubusercontent.com/disposable/disposable-email-domains/master/domains.txt",
       "license": "MIT",
-      "domains": 75391
+      "domains": 75399
     },
     {
       "id": "wesbos",
@@ -43,7 +43,7 @@
       "name": "7c/fakefilter",
       "url": "https://raw.githubusercontent.com/7c/fakefilter/main/txt/data.txt",
       "license": "MIT",
-      "domains": 4761
+      "domains": 4766
     }
   ],
   "maintained_by": "Verifly \u2014 https://verifly.email",
